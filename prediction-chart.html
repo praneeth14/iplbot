@@ -1,35 +1,42 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
-<script>
-window.onload = function() {
+    <script>
+        window.onload = function () {
+            var url_string = window.location.href
+            var url = new URL(url_string);
+            var titleText = url.searchParams.get("title");
+            var teamOne = url.searchParams('team1');
+            var teamTwo = url.searchParams('team2');
+            var teamOnePer = url.searchParams('team1Per');
+            var teamTwoPer = url.searchParams('team2Per');
 
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	title: {
-		text: "Desktop Search Engine Market Share - 2016"
-	},
-	data: [{
-		type: "pie",
-		startAngle: 240,
-		yValueFormatString: "##0.00\"%\"",
-		indexLabel: "{label} {y}",
-		dataPoints: [
-			{y: 79.45, label: "Google"},
-			{y: 7.31, label: "Bing"},
-			{y: 7.06, label: "Baidu"},
-			{y: 4.91, label: "Yahoo"},
-			{y: 1.26, label: "Others"}
-		]
-	}]
-});
-chart.render();
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: titleText
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0.00\"%\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: [
+                        { y: parseFloat(teamOnePer), label: teamOne },
+                        { y: parseFloat(teamTwoPer), label: teamTwo }
+                    ]
+                }]
+            });
+            chart.render();
 
-}
-</script>
+        }
+    </script>
 </head>
+
 <body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
+
 </html>
