@@ -4,18 +4,17 @@
 <head>
     <script>
         window.onload = function () {
-            var url_string = window.location.href
-            var url = new URL(url_string);
-            var titleText = url.searchParams.get("title");
-            var teamOne = url.searchParams('team1');
-            var teamTwo = url.searchParams('team2');
-            var teamOnePer = url.searchParams('team1Per');
-            var teamTwoPer = url.searchParams('team2Per');
+            let params = new URLSearchParams(document.location.search.substring(1));
+            let team1 = params.get("team1");
+            let team2 = params.get("team2");
+
+            let team1Per = params.get("team1Per");
+            let team2Per = params.get("team2Per");
 
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 title: {
-                    text: titleText
+                    text: team1 + " vs " + team2
                 },
                 data: [{
                     type: "pie",
@@ -23,8 +22,8 @@
                     yValueFormatString: "##0.00\"%\"",
                     indexLabel: "{label} {y}",
                     dataPoints: [
-                        { y: parseFloat(teamOnePer), label: teamOne },
-                        { y: parseFloat(teamTwoPer), label: teamTwo }
+                        { y: parseFloat(team1Per), label: team1 },
+                        { y: parseFloat(team2Per), label: team2 }
                     ]
                 }]
             });
