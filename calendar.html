@@ -30,13 +30,15 @@
                 var date = $("#datetimepicker12").data("DateTimePicker").date().format().split('T')[0];
                 console.log(date)
                 window.parent.postMessage(JSON.stringify({
-                    "event": {
-                        "code": "caladar-date",
-                        "data": {
-                            "selectedDate": date
-                        }
-                    }
-                }), '*');
+                        event_code: 'ym-client-event', data: JSON.stringify({
+                            event: {
+                                code: "Date",
+                                data: {
+                                    selectedDate: date
+                                }
+                            }
+                        })
+                    }), '*');
                 $('#custom :input').attr('disabled', 'disabled');
                 $('#custom').fadeTo("slow", 0.15, function () {
                     $(this).find(':input').attr('disabled', 'disabled');
